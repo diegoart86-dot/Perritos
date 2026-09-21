@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
@@ -21,5 +23,129 @@ body {
   color: #3D2B24;
   background-color: #FFF8EE;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+html.dark body {
+  color: #F5EDE6;
+  background-color: #181311;
+}
+
+/* Dark Mode Global Overrides for warm night experience */
+html.dark .bg-white {
+  background-color: #241B18 !important;
+}
+
+html.dark .bg-white\/85,
+html.dark .bg-white\/90,
+html.dark .bg-white\/95 {
+  background-color: rgba(36, 27, 24, 0.95) !important;
+}
+
+html.dark .bg-\[\#FFFDF9\] {
+  background-color: #2A201C !important;
+}
+
+html.dark .bg-\[\#FFF8EE\] {
+  background-color: #332722 !important;
+}
+
+html.dark .bg-\[\#FFF9EE\] {
+  background-color: #382B25 !important;
+}
+
+html.dark .bg-\[\#FFF0D4\] {
+  background-color: #4A3728 !important;
+}
+
+html.dark .text-\[\#3D2B24\] {
+  color: #F5EDE6 !important;
+}
+
+html.dark .text-\[\#806F66\] {
+  color: #BAAAA0 !important;
+}
+
+html.dark .text-\[\#5A3828\] {
+  color: #E8DACB !important;
+}
+
+html.dark .border-\[\#F4D396\] {
+  border-color: #5A3E30 !important;
+}
+
+html.dark .border-\[\#F4D396\]\/60,
+html.dark .border-\[\#F4D396\]\/70,
+html.dark .border-\[\#F4D396\]\/80,
+html.dark .border-\[\#F4D396\]\/30,
+html.dark .border-\[\#F4D396\]\/40 {
+  border-color: rgba(90, 62, 48, 0.6) !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #2E231F !important;
+  color: #F5EDE6 !important;
+  border-color: #5A3E30 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #8C7C72 !important;
+}
+
+/* Modal Backdrops & Cards in Dark Mode */
+html.dark .bg-\[\#3D2B24\]\/40 {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+html.dark #daily-mischief-banner {
+  background-image: linear-gradient(to right, #2C211C, #241A16, #30241E) !important;
+  border-color: #5A3E30 !important;
+}
+
+html.dark .bg-emerald-50,
+html.dark .bg-\[\#ECFDF5\] {
+  background-color: rgba(6, 78, 59, 0.35) !important;
+}
+
+html.dark .text-emerald-800,
+html.dark .text-\[\#059669\] {
+  color: #6EE7B7 !important;
+}
+
+html.dark .border-emerald-200,
+html.dark .border-\[\#A7F3D0\] {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+html.dark .bg-\[\#FEF3C7\] {
+  background-color: rgba(120, 53, 15, 0.35) !important;
+}
+
+html.dark .text-\[\#D97706\],
+html.dark .text-\[\#B45309\] {
+  color: #FBBF24 !important;
+}
+
+html.dark .border-\[\#FDE68A\] {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
+html.dark .bg-\[\#EFF6FF\],
+html.dark .bg-\[\#EBF6FD\],
+html.dark .bg-\[\#EEF2FF\] {
+  background-color: rgba(30, 58, 138, 0.35) !important;
+}
+
+/* Smooth transition on key surfaces when toggling theme */
+#golden-life-app-root,
+header,
+#status-dashboard-container,
+#daily-mischief-banner {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+
 

@@ -12,6 +12,9 @@ export interface Translations {
   languageSelect: string;
   languageCurrent: string;
   toggleLang: string;
+  themeToggleLight: string;
+  themeToggleDark: string;
+  themeLabel: string;
 
   // Rooms
   roomLiving: string;
@@ -175,6 +178,9 @@ export const translations: Record<Language, Translations> = {
     languageSelect: 'Idioma',
     languageCurrent: 'Español',
     toggleLang: 'EN',
+    themeToggleLight: 'Cambiar a modo claro',
+    themeToggleDark: 'Cambiar a modo oscuro',
+    themeLabel: 'Tema',
 
     roomLiving: 'Sala',
     roomGarden: 'Jardín',
@@ -326,6 +332,9 @@ export const translations: Record<Language, Translations> = {
     languageSelect: 'Language',
     languageCurrent: 'English',
     toggleLang: 'ES',
+    themeToggleLight: 'Switch to light mode',
+    themeToggleDark: 'Switch to dark mode',
+    themeLabel: 'Theme',
 
     roomLiving: 'Living Room',
     roomGarden: 'Garden',

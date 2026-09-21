@@ -14,6 +14,7 @@ import CalendarPanel from './components/CalendarPanel';
 import GoldenLogo from './components/GoldenLogo';
 import SplashScreen from './components/SplashScreen';
 import LanguageToggle from './components/LanguageToggle';
+import ThemeToggle from './components/ThemeToggle';
 import MemoriesPanel from './components/MemoriesPanel';
 import RenamePetModal from './components/RenamePetModal';
 import NewMemoryToast from './components/NewMemoryToast';
@@ -23,6 +24,7 @@ import DailyMischiefBanner from './components/DailyMischiefBanner';
 import { INITIAL_MEMORIES, MISCHIEF_PRESETS, SPONTANEOUS_EVENT_PRESETS, calculateDominantPersonality } from './memoriesData';
 import { PetMemory, MischiefItem, SpontaneousEvent } from './types';
 import { useLanguage } from './i18n/LanguageContext';
+import { useTheme } from './theme/ThemeContext';
 import { savePhotoToStorage, deletePhotoFromStorage, getAllStoredPhotos } from './utils/photoStorage';
 import { 
   Sparkles, 
@@ -91,6 +93,7 @@ const getInitialReminders = (): PetReminder[] => {
 
 export default function App() {
   const { t, lang } = useLanguage();
+  const { isDark } = useTheme();
 
   // --- 1. CORE STATES ---
   const [gameState, setGameState] = useState<GameState>(DEFAULT_GAME_STATE);
@@ -1402,6 +1405,18 @@ export default function App() {
     if (isSleeping) {
       return 'bg-gradient-to-b from-[#1E192A] via-[#2A233C] to-[#171424] text-white';
     }
+    if (isDark) {
+      switch (bg) {
+        case 'garden':
+          return 'bg-gradient-to-b from-[#122218] via-[#1A221C] to-[#0E1B13] text-[#F3EAE2]';
+        case 'bathroom':
+          return 'bg-gradient-to-b from-[#12212B] via-[#172129] to-[#0D1A22] text-[#F3EAE2]';
+        case 'bedroom':
+          return 'bg-gradient-to-b from-[#1D1728] via-[#231A2C] to-[#161220] text-[#F3EAE2]';
+        default: // living-room
+          return 'bg-gradient-to-b from-[#1F1916] via-[#261E1A] to-[#171311] text-[#F3EAE2]';
+      }
+    }
     switch (bg) {
       case 'garden':
         return 'bg-gradient-to-b from-[#EDF7ED] via-[#FFFDF9] to-[#E3F2E4]';
@@ -1482,6 +1497,9 @@ export default function App() {
               >
                 {musicEnabled ? <Volume2 className="w-4 h-4 text-[#F4B942]" /> : <VolumeX className="w-4 h-4" />}
               </button>
+
+              {/* Theme Toggle (Dark/Light) */}
+              <ThemeToggle />
 
               {/* Language Switcher */}
               <LanguageToggle />

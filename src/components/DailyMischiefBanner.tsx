@@ -17,7 +17,7 @@ export default function DailyMischiefBanner({
   onPlay,
 }: DailyMischiefBannerProps) {
   return (
-    <div className="w-full bg-gradient-to-r from-[#FFF5E5] via-[#FFFDF9] to-[#FFF0D4] border border-[#F4D396] rounded-[22px] p-3 sm:p-3.5 shadow-[0_2px_12px_rgba(90,56,40,0.04)] flex items-center justify-between gap-3 select-none">
+    <div id="daily-mischief-banner" className="w-full bg-gradient-to-r from-[#FFF5E5] via-[#FFFDF9] to-[#FFF0D4] border border-[#F4D396] rounded-[22px] p-3 sm:p-3.5 shadow-[0_2px_12px_rgba(90,56,40,0.04)] flex items-center justify-between gap-3 select-none">
       <div className="flex items-center gap-3 min-w-0">
         <div className="w-11 h-11 rounded-2xl bg-white border border-[#F4B942] flex items-center justify-center text-2xl shadow-2xs shrink-0">
           {mischief.icon}
