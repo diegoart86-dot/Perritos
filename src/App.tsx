@@ -1453,70 +1453,115 @@ export default function App() {
 
       <div className="w-full max-w-xl flex flex-col gap-4 relative z-10">
         
-        {/* TOP STATUS NAVIGATION BAR WITH NEW BRAND LOGO */}
-        <header className="flex justify-between items-center bg-white/85 backdrop-blur-md rounded-[22px] px-3.5 sm:px-4 py-2.5 sm:py-3 shadow-[0_2px_12px_rgba(90,56,40,0.04)] border border-[#F4D396]/60">
-          <GoldenLogo size="md" />
+        {/* TOP STATUS NAVIGATION BAR WITH NEW BRAND LOGO AND MAIN ACTION BUTTONS */}
+        <header className="w-full bg-white/95 backdrop-blur-md rounded-[24px] p-3 sm:p-3.5 shadow-[0_3px_16px_rgba(90,56,40,0.06)] border border-[#F4D396]/60 flex flex-col gap-2.5 select-none">
+          {/* Top Row: Brand, Coins & Utilities */}
+          <div className="flex items-center justify-between gap-2">
+            <GoldenLogo size="sm" />
 
-          <div className="flex items-center gap-1 sm:gap-2">
-            {/* Language Switcher */}
-            <LanguageToggle />
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Coins Counter Badge */}
+              <div 
+                className="flex items-center gap-1.5 bg-[#FFF9EE] border border-[#F4D396]/80 px-2.5 py-1 rounded-full text-xs font-montserrat font-semibold text-[#3D2B24] shadow-2xs"
+                title={`${gameState.coins} ${t('coinsLabel')}`}
+              >
+                <Coins className="w-3.5 h-3.5 text-[#F4B942]" />
+                <span>{gameState.coins}</span>
+              </div>
 
-            {/* Music Toggle */}
+              {/* Music Toggle */}
+              <button
+                onClick={handleToggleMusic}
+                className={`p-1.5 sm:p-2 rounded-[14px] transition-all border cursor-pointer ${
+                  musicEnabled 
+                    ? 'bg-[#FFF0D4] border-[#F4B942] text-[#3D2B24]' 
+                    : 'bg-[#FFFDF9] border-[#F4D396]/60 text-[#806F66] hover:bg-[#FFF8EE]'
+                }`}
+                title={t('musicTitle')}
+                aria-label={t('musicTitle')}
+              >
+                {musicEnabled ? <Volume2 className="w-4 h-4 text-[#F4B942]" /> : <VolumeX className="w-4 h-4" />}
+              </button>
+
+              {/* Language Switcher */}
+              <LanguageToggle />
+            </div>
+          </div>
+
+          {/* Bottom Row: Main Navigation Action Matrix (Jugar, Tienda, Recuerdos, Logros, Calendario, Diario) */}
+          <nav className="grid grid-cols-6 gap-1.5 sm:gap-2 pt-2 border-t border-[#F4D396]/30" aria-label="Navegación principal">
+            {/* 1. BOTÓN JUGAR (Destacado en oro y primero para que nunca quede fuera) */}
             <button
-              onClick={handleToggleMusic}
-              className={`p-2 rounded-[16px] transition-all border cursor-pointer ${
-                musicEnabled 
-                  ? 'bg-[#FFF0D4] border-[#F4B942] text-[#3D2B24]' 
-                  : 'bg-[#FFFDF9] border-[#F4D396]/60 text-[#806F66] hover:bg-[#FFF8EE]'
-              }`}
-              title={t('musicTitle')}
+              id="nav-play-btn"
+              onClick={() => setShowMinigames(true)}
+              className="py-2 px-1 rounded-[16px] bg-gradient-to-b from-[#FFD477] to-[#F4B942] hover:from-[#FFE099] hover:to-[#FFD477] active:scale-95 text-[#3D2B24] transition-all flex flex-col items-center justify-center gap-1 text-[11px] sm:text-xs font-montserrat font-bold shadow-[0_2px_8px_rgba(244,185,66,0.28)] border border-[#E29E2E] cursor-pointer"
+              title="Jugar Minijuegos"
             >
-              {musicEnabled ? <Volume2 className="w-4 h-4 text-[#F4B942]" /> : <VolumeX className="w-4 h-4" />}
+              <Gamepad2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#3D2B24]" />
+              <span className="truncate max-w-full leading-none">Jugar</span>
             </button>
 
-            {/* Calendar Toggle */}
+            {/* 2. TIENDA */}
             <button
-              onClick={() => setShowCalendar(true)}
-              className="p-2 rounded-[16px] bg-[#FFFDF9] border border-[#F4D396]/60 text-[#3D2B24] hover:bg-[#FFF8EE] transition-all flex items-center gap-1.5 text-xs font-montserrat font-medium cursor-pointer shadow-2xs"
-              title={t('calendarTitle')}
+              id="nav-shop-btn"
+              onClick={() => setShowShop(true)}
+              className="py-2 px-1 rounded-[16px] bg-[#FFFDF9] hover:bg-[#FFF8EE] active:scale-95 text-[#3D2B24] transition-all flex flex-col items-center justify-center gap-1 text-[11px] sm:text-xs font-montserrat font-medium shadow-2xs border border-[#F4D396]/60 cursor-pointer"
+              title={t('shopTitle')}
             >
-              <Calendar className="w-4 h-4 text-[#F4B942]" />
-              <span className="hidden sm:inline">{t('calendarTitle')}</span>
+              <ShoppingBag className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#F4B942]" />
+              <span className="truncate max-w-full leading-none">{t('shopTitle')}</span>
             </button>
 
-            {/* Memories Album Toggle */}
+            {/* 3. RECUERDOS */}
             <button
+              id="nav-memories-btn"
               onClick={() => setShowMemories(true)}
-              className="p-2 rounded-[16px] bg-[#FFFDF9] border border-[#F4D396]/60 text-[#3D2B24] hover:bg-[#FFF8EE] transition-all flex items-center gap-1.5 text-xs font-montserrat font-medium cursor-pointer shadow-2xs relative"
+              className="py-2 px-1 rounded-[16px] bg-[#FFFDF9] hover:bg-[#FFF8EE] active:scale-95 text-[#3D2B24] transition-all flex flex-col items-center justify-center gap-1 text-[11px] sm:text-xs font-montserrat font-medium shadow-2xs border border-[#F4D396]/60 cursor-pointer relative"
               title={t('memoriesTitle')}
             >
-              <Camera className="w-4 h-4 text-[#F4B942]" />
-              <span className="hidden sm:inline">{t('memoriesTitle')}</span>
+              <Camera className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#F4B942]" />
+              <span className="truncate max-w-full leading-none">{t('memoriesTitle')}</span>
               {gameState.memories && gameState.memories.some((m) => m.unlocked) && (
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-white" />
+                <span className="absolute top-1 right-2 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-white" />
               )}
             </button>
 
-            {/* Shop Toggle */}
+            {/* 4. LOGROS */}
             <button
-              onClick={() => setShowShop(true)}
-              className="p-2 rounded-[16px] bg-[#FFFDF9] border border-[#F4D396]/60 text-[#3D2B24] hover:bg-[#FFF8EE] transition-all flex items-center gap-1.5 text-xs font-montserrat font-medium cursor-pointer shadow-2xs"
-              title={t('shopTitle')}
+              id="nav-achievements-btn"
+              onClick={() => setShowAchievements(true)}
+              className="py-2 px-1 rounded-[16px] bg-[#FFFDF9] hover:bg-[#FFF8EE] active:scale-95 text-[#3D2B24] transition-all flex flex-col items-center justify-center gap-1 text-[11px] sm:text-xs font-montserrat font-medium shadow-2xs border border-[#F4D396]/60 cursor-pointer"
+              title={t('achievementsBtn')}
             >
-              <ShoppingBag className="w-4 h-4 text-[#F4B942]" />
-              <span className="hidden sm:inline">{t('shopTitle')}</span>
+              <Trophy className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#F4B942]" />
+              <span className="truncate max-w-full leading-none">{t('achievementsBtn')}</span>
             </button>
 
-            {/* Minigames Toggle */}
+            {/* 5. CALENDARIO */}
             <button
-              onClick={() => setShowMinigames(true)}
-              className="p-2 rounded-[16px] bg-[#F4B942] text-[#3D2B24] hover:bg-[#FFD477] transition-all flex items-center gap-1.5 text-xs font-montserrat font-medium shadow-xs border border-[#E29E2E] cursor-pointer"
-              title={t('minigamesTitle')}
+              id="nav-calendar-btn"
+              onClick={() => setShowCalendar(true)}
+              className="py-2 px-1 rounded-[16px] bg-[#FFFDF9] hover:bg-[#FFF8EE] active:scale-95 text-[#3D2B24] transition-all flex flex-col items-center justify-center gap-1 text-[11px] sm:text-xs font-montserrat font-medium shadow-2xs border border-[#F4D396]/60 cursor-pointer relative"
+              title={t('calendarTitle')}
             >
-              <Gamepad2 className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('minigamesTitle')}</span>
+              <Calendar className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#F4B942]" />
+              <span className="truncate max-w-full leading-none">{t('calendarTitle')}</span>
+              {reminders && reminders.some((r) => !r.completed) && (
+                <span className="absolute top-1 right-2 w-2 h-2 bg-amber-500 rounded-full ring-2 ring-white" />
+              )}
             </button>
-          </div>
+
+            {/* 6. DIARIO */}
+            <button
+              id="nav-diary-btn"
+              onClick={() => setShowDiary(true)}
+              className="py-2 px-1 rounded-[16px] bg-[#FFFDF9] hover:bg-[#FFF8EE] active:scale-95 text-[#3D2B24] transition-all flex flex-col items-center justify-center gap-1 text-[11px] sm:text-xs font-montserrat font-medium shadow-2xs border border-[#F4D396]/60 cursor-pointer"
+              title={t('diaryBtn')}
+            >
+              <BookOpen className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#10B981]" />
+              <span className="truncate max-w-full leading-none">{t('diaryBtn')}</span>
+            </button>
+          </nav>
         </header>
 
         {/* MAIN PET GRAPHICS WINDOW (PROTAGONIST STAGE: 60-70% VISUAL FOCUS) */}
