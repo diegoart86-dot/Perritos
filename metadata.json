@@ -1,0 +1,6 @@
+{
+  "name": "GoldenLife",
+  "description": "An adorable virtual pet simulator where you raise and care for a playful, mischievous Golden Retriever puppy named Golden Buddy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
